@@ -3,11 +3,7 @@ const getArgValue = require("../utils/getArgValue.js");
 
 module.exports = async function (client, interaction, config) {
     const args = interaction.options;
-    const hasAuth = require("../utils/isAdminOrOfficer.js")(
-        client,
-        interaction,
-        config
-    );
+    const hasAuth = require("../utils/isAdminOrOfficer.js")(client, interaction, config);
 
     let completed = false;
     const messageId = getArgValue(args, "id");
@@ -32,8 +28,7 @@ module.exports = async function (client, interaction, config) {
     if (hasAuth && completed) {
         textToDisplay = "Your event was deleted successfully!";
     } else if (hasAuth && !completed) {
-        textToDisplay =
-            "An error has occurred when deleting your event, likely a dodgy id!";
+        textToDisplay = "An error has occurred when deleting your event, likely a dodgy id!";
     }
 
     require("../utils/sendTextReply.js")(client, interaction, textToDisplay);
