@@ -1,6 +1,6 @@
 const getArgValue = require("../utils/getArgValue.js");
 
-module.exports = async function (client, interaction, config) {
+module.exports = async function (client, interaction) {
     const thecookies = require("../utils/loadConfigFile.js")("cookie");
     const url = thecookies[(thecookies.length * Math.random()) | 0];
     const args = interaction.options;

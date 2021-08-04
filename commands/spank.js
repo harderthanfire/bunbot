@@ -1,6 +1,6 @@
 const getArgValue = require("../utils/getArgValue.js");
 
-module.exports = async function (client, interaction, config) {
+module.exports = async function (client, interaction) {
     const spanks = require("../utils/loadConfigFile.js")("spank");
     const url = spanks[(spanks.length * Math.random()) | 0];
     const args = interaction.options;

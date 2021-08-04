@@ -1,6 +1,6 @@
 const getArgValue = require("../utils/getArgValue.js");
 
-module.exports = async function (client, interaction, config) {
+module.exports = async function (client, interaction) {
     const headpats = require("../utils/loadConfigFile.js")("headpat");
     const url = headpats[(headpats.length * Math.random()) | 0];
     const args = interaction.options;
