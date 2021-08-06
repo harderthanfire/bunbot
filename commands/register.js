@@ -14,14 +14,14 @@ module.exports = async function (client, interaction, config) {
 
     let edited = false;
     await interaction.reply({ content: "Registering please wait...", ephemeral: true });
-    const res = await xiv.character.search(getArgValue(args, "charactername"), { server: getArgValue(args, "server").replace(" ", "") });
+    const res = await xiv.character.search(getArgValue(args, "charactername").trim(), { server: getArgValue(args, "server").trim() });
 
     if (res && res.Results.length) {
         let charId = res.Results[0].ID;
         for (const char of chars) {
             if (char.id == interaction.user.id) {
-                char.name = getArgValue(args, "charactername");
-                char.server = getArgValue(args, "server").replace(" ", "");
+                char.name = getArgValue(args, "charactername").trim();
+                char.server = getArgValue(args, "server").trim();
                 char.charid = charId;
                 edited = true;
                 break;
@@ -31,9 +31,9 @@ module.exports = async function (client, interaction, config) {
         if (!edited) {
             chars.push({
                 id: interaction.user.id,
-                name: getArgValue(args, "charactername"),
+                name: getArgValue(args, "charactername").trim(),
                 charid: charId,
-                server: getArgValue(args, "server").replace(" ", ""),
+                server: getArgValue(args, "server").trim(),
             });
         }
 
