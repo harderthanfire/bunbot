@@ -4,7 +4,7 @@
     "eventsChannel": "events_channel_id",
     "adminRoleId": 12345, //id of the admin role
     "officerRoleId": 12345, //id of the officer role
-    "characterUrl": "https://ffxiv-character-cards.herokuapp.com",
+    "characterUrl": "https://ffxiv-character-cards.herokuapp.com/",
     "noAuthMessage": "Sorry you do not have auth for that command ",
     "events": []
 }

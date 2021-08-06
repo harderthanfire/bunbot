@@ -1,6 +1,6 @@
 module.exports = function (client, config) {
     const data = {
-        name: "me",
+        name: "mee",
         description: "Bot shows you yourself",
     };
 

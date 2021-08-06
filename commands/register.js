@@ -24,17 +24,11 @@ module.exports = async function (client, interaction, config) {
         });
     }
 
-    const options = {
-        hostname: config.characterUrl,
-        port: 443,
-        path: "/prepare/name/" + getArgValue(args, "server") + "/" + getArgValue(args, "charactername").replace(" ", "%20"),
-        method: "GET",
-    };
-
-    const req = https.request(options, () => {});
-    req.end();
-
     saveConfigFile("characters", chars);
+
+    https.get(config.characterUrl + "prepare/name/" + getArgValue(args, "server") + "/" + getArgValue(args, "charactername").replace(" ", "%20"), () => {}).on("error", (err) => {
+        console.log("Error: " + err.message);
+    });
 
     interaction.reply({ content: "Character registered!", ephemeral: true });
 };
