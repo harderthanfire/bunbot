@@ -10,7 +10,7 @@ module.exports = async function (client, interaction, config) {
     for (const char of chars) {
         if (char.id == interaction.user.id) {
             char.name = getArgValue(args, "charactername");
-            char.server = getArgValue(args, "server");
+            char.server = getArgValue(args, "server").replace(" ","");
             edited = true;
             break;
         }
@@ -20,13 +20,13 @@ module.exports = async function (client, interaction, config) {
         chars.push({
             id: interaction.user.id,
             name: getArgValue(args, "charactername"),
-            server: getArgValue(args, "server"),
+            server: getArgValue(args, "server").replace(" ", ""),
         });
     }
 
     saveConfigFile("characters", chars);
 
-    https.get(config.characterUrl + "prepare/name/" + getArgValue(args, "server") + "/" + getArgValue(args, "charactername").replace(" ", "%20"), () => {}).on("error", (err) => {
+    https.get(config.characterUrl + "prepare/name/" + getArgValue(args, "server").replace(" ", "") + "/" + getArgValue(args, "charactername").replace(" ", "%20"), () => {}).on("error", (err) => {
         console.log("Error: " + err.message);
     });
 
