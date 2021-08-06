@@ -13,7 +13,7 @@ module.exports = async function (client, interaction, config) {
     const args = interaction.options;
 
     let edited = false;
-    await interaction.reply({ content: "Registering please wait...", ephemeral: true });
+    await require("../utils/sendReply.js")(client, interaction,{ content: "Registering please wait...", ephemeral: true });
     const res = await xiv.character.search(getArgValue(args, "charactername").trim(), { server: getArgValue(args, "server").trim() });
 
     if (res && res.Results.length) {
@@ -38,7 +38,7 @@ module.exports = async function (client, interaction, config) {
         }
 
         saveConfigFile("characters", chars);
-        interaction.editReply({ content: "Character registered!", ephemeral: true });
+        require("../utils/editReply.js")(client, interaction,{ content: "Character registered!", ephemeral: true });
 
         https
             .get(config.characterUrl + "prepare/id/" + charId, () => {})
@@ -46,6 +46,6 @@ module.exports = async function (client, interaction, config) {
                 console.log("Error: " + err.message);
             });
     } else {
-        interaction.editReply({ content: "Failed to get character, please check the name and server!", ephemeral: true });
+        require("../utils/editReply.js")(client, interaction,{ content: "Failed to get character, please check the name and server!", ephemeral: true });
     }
 };

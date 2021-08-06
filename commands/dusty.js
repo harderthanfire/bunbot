@@ -3,7 +3,7 @@ module.exports = async function (client, interaction) {
     const url = dustys[(dustys.length * Math.random()) | 0];
     const textToDisplay = "<@!138340506106200074> get back to doing the MSQ or else!";
 
-    interaction.reply({
+    require("../utils/sendReply.js")(client, interaction,{
         embeds: [require("../utils/getEmbed.js")(textToDisplay, url)],
     });
 };

@@ -6,7 +6,7 @@ module.exports = async function (client, interaction) {
     const args = interaction.options;
     const textToDisplay = "Bonk <@!" + getArgValue(args, "target") + "> go to horny jail!";
 
-    interaction.reply({
+    require("../utils/sendReply.js")(client, interaction, {
         embeds: [require("../utils/getEmbed.js")(textToDisplay, url)],
     });
 };

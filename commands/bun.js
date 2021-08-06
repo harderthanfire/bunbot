@@ -3,7 +3,7 @@ module.exports = async function (client, interaction) {
     const url = buns[(buns.length * Math.random()) | 0];
     const textToDisplay = interaction.member.displayName + " here is your cute bun bun!";
 
-    interaction.reply({
+    require("../utils/sendReply.js")(client, interaction, {
         embeds: [require("../utils/getEmbed.js")(textToDisplay, url)],
     });
 };
