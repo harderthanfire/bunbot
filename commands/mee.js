@@ -14,7 +14,7 @@ module.exports = async function (client, interaction, config) {
     }
 
     const url = config.characterUrl + "characters/id/" + char.charid + ".png";
-    const textToDisplay = interaction.member.displayName + " looking goooood!";
+    const textToDisplay = char.name + " looking goooood!";
 
     interaction.reply({
         embeds: [require("../utils/getEmbed.js")(textToDisplay, url)],
