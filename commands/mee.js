@@ -10,6 +10,7 @@ module.exports = async function (client, interaction, config) {
 
     if (!char) {
         require("../utils/sendTextReply.js")(client, interaction, "Please register your character using /register!");
+        return;
     }
 
     const url = config.characterUrl + "characters/name/" + char.server + "/" + char.name.replace(" ", "%20") + ".png";
