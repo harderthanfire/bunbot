@@ -1,5 +1,5 @@
 module.exports = async function (client, interaction, text) {
-    interaction
+    await interaction
         .reply({
             content: interaction.member.displayName + ": " + text,
         })

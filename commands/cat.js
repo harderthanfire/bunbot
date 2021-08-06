@@ -19,13 +19,11 @@ module.exports = async function (client, interaction) {
                 }
                 const textToDisplay = interaction.member.displayName + " here is your cute kitty!";
 
-                require("../utils/editReply.js")(client, interaction,{
-                    embeds: [require("../utils/getEmbed.js")(textToDisplay, url)],
-                });
+                require("../utils/editReply.js")(client, interaction, { content: " ", embeds: [require("../utils/getEmbed.js")(textToDisplay, url)] });
             });
         })
         .on("error", (err) => {
             console.log("Error: " + err.message);
-            require("../utils/editReply.js")(client, interaction,{ content: "Unable to load kitty", ephemeral: true });
+            require("../utils/editReply.js")(client, interaction, { content: "Unable to load kitty", ephemeral: true });
         });
 };
