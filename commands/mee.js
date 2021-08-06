@@ -13,7 +13,7 @@ module.exports = async function (client, interaction, config) {
         return;
     }
 
-    const url = config.characterUrl + "characters/name/" + char.server.replace(" ", "") + "/" + char.name.replace(" ", "%20") + ".png";
+    const url = config.characterUrl + "characters/id/" + char.charid + ".png";
     const textToDisplay = interaction.member.displayName + " looking goooood!";
 
     interaction.reply({
