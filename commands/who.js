@@ -15,7 +15,7 @@ module.exports = async function (client, interaction, config) {
         return;
     }
 
-    const url = config.characterUrl + "characters/id/" + char.charid + ".png";
+    const url = config.characterUrl + "characters/id/" + char.charid + ".png?" + Date.now();
     const textToDisplay = char.name + " looks like this";
 
     require("../utils/sendReply.js")(client, interaction,{
