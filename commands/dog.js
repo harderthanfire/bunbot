@@ -1,7 +1,7 @@
 const https = require("https");
 module.exports = async function (client, interaction) {
     let cats = [];
-    require("../utils/sendReply.js")(client, interaction, { content: "Loading doggo please wait..." });
+    await require("../utils/sendReply.js")(client, interaction, { content: "Loading doggo please wait..." });
     https
         .get("https://api.thedogapi.com/v1/images/search?size=full", (resp) => {
             let data = "";
