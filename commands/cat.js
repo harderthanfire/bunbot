@@ -17,7 +17,7 @@ module.exports = async function (client, interaction) {
                 if (cats) {
                     url = "https://cataas.com" + cats.url;
                 }
-                const textToDisplay = interaction.member.displayName + " here is your cute kitty!";
+                const textToDisplay = interaction.member.displayName + ", here is your cute kitty!";
 
                 require("../utils/editReply.js")(client, interaction, { content: " ", embeds: [require("../utils/getEmbed.js")(textToDisplay, url)] });
             });
