@@ -14,7 +14,7 @@ module.exports = async function (client, interaction) {
                 cats = JSON.parse(data);
                 let url = "";
 
-                if (cats && cats.length) {
+                if (cats) {
                     url = "https://cataas.com" + cats.url;
                 }
                 const textToDisplay = interaction.member.displayName + " here is your cute kitty!";
