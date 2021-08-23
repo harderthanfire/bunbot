@@ -3,7 +3,7 @@ module.exports = async function (client, interaction) {
     let cats = [];
     await require("../utils/sendReply.js")(client, interaction, { content: "Loading kitty please wait..." });
     https
-        .get("https://api.thecatapi.com/v1/images/search?size=full", (resp) => {
+        .get("https://cataas.com/cat?json=true", (resp) => {
             let data = "";
 
             resp.on("data", (chunk) => {
@@ -15,7 +15,7 @@ module.exports = async function (client, interaction) {
                 let url = "";
 
                 if (cats && cats.length) {
-                    url = cats[0].url;
+                    url = "https://cataas.com" + cats.url;
                 }
                 const textToDisplay = interaction.member.displayName + " here is your cute kitty!";
 
