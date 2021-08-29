@@ -12,7 +12,7 @@ module.exports = async function (client, interaction, config) {
             const reactions = message.reactions.cache;
             let users = [];
             for (const reaction of reactions) {
-                for (const user of reaction.users.cache) {
+                for (const user of await reaction[1].users.fetch()) {
                     if (users.indexOf(user) < 0) {
                         users.push(user);
                     }
@@ -20,7 +20,7 @@ module.exports = async function (client, interaction, config) {
             }
             let messageText = "";
             for (const user of users) {
-                messageText += " <@!" + user + "> "
+                messageText += " <@!" + user[0] + "> "
             }
             messageText += "\n\r" + getArgValue(args, "message");
             messageText += "\n\r" + message.url;

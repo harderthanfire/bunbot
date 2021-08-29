@@ -5,7 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "@xivapi/js": "^0.3.3",
-    "discord.js": "13.0.0-dev.t1627992462.35fa3b3"
+    "discord.js": "13.1.0"
   },
   "devDependencies": {},
   "scripts": {

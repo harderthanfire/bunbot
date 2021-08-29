@@ -1,7 +1,7 @@
 module.exports = function (client, config) {
     const data = {
-        name: "deleteevent",
-        description: "Delete an event",
+        name: "deletedutyevent",
+        description: "Delete a duty event",
         options: [
             {
                 name: "id",
