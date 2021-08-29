@@ -13,7 +13,7 @@ module.exports = async function (client, interaction, config) {
             const deleted = await message.delete();
 
             if (deleted) {
-                config.events.splice(config.dutyEvents.indexOf(messageId), 1);
+                config.dutyEvents.splice(config.dutyEvents.indexOf(messageId), 1);
                 saveConfigFile("config", config);
                 completed = true;
             }
