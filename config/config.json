@@ -2,9 +2,11 @@
     "clientId": "your_discord_bot_clientid",
     "guildId": "your_discord_server_id",
     "eventsChannel": "events_channel_id",
+    "dutyEventsChannel": "duty_events_channel_id",
     "adminRoleId": 12345, //id of the admin role
     "officerRoleId": 12345, //id of the officer role
     "characterUrl": "https://ffxiv-character-cards.herokuapp.com/",
     "noAuthMessage": "Sorry you do not have auth for that command ",
-    "events": []
+    "events": [],
+    "dutyEvents": []
 }
