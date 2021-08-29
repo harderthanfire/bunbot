@@ -9,18 +9,21 @@ module.exports = async function (client, interaction, config) {
         try {
             const channel = client.channels.cache.get(config.dutyEventsChannel);
             const message = await channel.messages.fetch(messageId);
-            const reactions = message.reactions.cache;
             let users = [];
+            let reactions = [];
+            await message.reactions.cache.each((reaction) => {
+                reactions.push(reaction);
+            });
             for (const reaction of reactions) {
-                for (const user of await reaction[1].users.fetch()) {
-                    if (users.indexOf(user) < 0) {
-                        users.push(user);
-                    }
-                }
+                const theUsers = await reaction.users.fetch();
+                theUsers.each((user) => {
+                    if (users.indexOf(user) < 0) users.push(user);
+                });
             }
+
             let messageText = "";
             for (const user of users) {
-                messageText += " <@!" + user[0] + "> "
+                messageText += " <@!" + user.id + "> ";
             }
             messageText += "\n\r" + getArgValue(args, "message");
             messageText += "\n\r" + message.url;
