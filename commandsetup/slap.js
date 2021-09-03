@@ -1,5 +1,5 @@
-module.exports = function (client, config) {
-    const data = {
+module.exports = {
+    data: {
         name: "slap",
         description: "Slap another user",
         options: [
@@ -10,6 +10,5 @@ module.exports = function (client, config) {
                 required: true,
             },
         ],
-    };
-    client.guilds.cache.get(config.guildId)?.commands.create(data);
+    }
 };

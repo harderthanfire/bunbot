@@ -3,9 +3,9 @@ module.exports = async function (client, interaction) {
     const args = interaction.options;
     const firstUser = await interaction.guild.members.fetch(getArgValue(args, "firstuser"));
     const secondUser = await interaction.guild.members.fetch(getArgValue(args, "seconduser"));
-    const seed = firstUser.id + secondUser.id;
+    const seed = (+firstUser.id + +secondUser.id);
     const percent = ~~(require("../utils/getRandom.js")(seed) * 100);
-    const combinedUser = firstUser.nickname.substring(0, firstUser.length / 2) + secondUser.nickname.substring(secondUser.length / 2);
+    const combinedUser = firstUser.displayName.substring(0, firstUser.displayName.length / 2) + secondUser.displayName.substring(secondUser.displayName.length / 2);
     const textToDisplay = "<@!" + firstUser.id + "> and <@!" + secondUser.id + "> = " + combinedUser + " with a rating of: " + percent + "%!";
 
     require("../utils/sendReply.js")(client, interaction, {

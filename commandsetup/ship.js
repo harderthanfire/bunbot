@@ -1,5 +1,5 @@
-module.exports = function (client, config) {
-    const data = {
+module.exports = {
+    data: {
         name: "ship",
         description: "Pass in two users to get their compatability scores",
         options: [
@@ -16,6 +16,5 @@ module.exports = function (client, config) {
                 required: true,
             },
         ],
-    };
-    client.guilds.cache.get(config.guildId)?.commands.create(data);
+    }
 };

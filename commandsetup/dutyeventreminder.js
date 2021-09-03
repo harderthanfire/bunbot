@@ -1,5 +1,5 @@
-module.exports = function (client, config) {
-    const data = {
+module.exports = {
+    data: {
         name: "dutyeventreminder",
         description: "Remind people who reacted about a duty event",
         options: [
@@ -16,6 +16,5 @@ module.exports = function (client, config) {
                 required: true,
             },
         ],
-    };
-    client.guilds.cache.get(config.guildId)?.commands.create(data);
+    }
 };

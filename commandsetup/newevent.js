@@ -1,5 +1,5 @@
-module.exports = function (client, config) {
-    const data = {
+module.exports = {
+    data: {
         name: "newevent",
         description: "Create a new event",
         options: [
@@ -34,7 +34,5 @@ module.exports = function (client, config) {
                 required: true,
             },
         ],
-    };
-
-    client.guilds.cache.get(config.guildId)?.commands.create(data);
+    }
 };
