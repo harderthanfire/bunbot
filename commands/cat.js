@@ -12,7 +12,12 @@ module.exports = {
                 });
 
                 resp.on("end", () => {
-                    cats = JSON.parse(data);
+                    try {
+                        cats = JSON.parse(data);
+                    } catch (err) {
+                        console.log("Error: " + err.message);
+                        require("../utils/editReply.js")(client, interaction, { content: "Unable to load kitty", ephemeral: true });
+                    }
                     let url = "";
 
                     if (cats) {

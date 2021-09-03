@@ -1,7 +1,7 @@
 const https = require("https");
 module.exports = {
     async execute(client, interaction) {
-        let cats = [];
+        let dogs = [];
         await require("../utils/sendReply.js")(client, interaction, { content: "Loading doggo please wait..." });
         https
             .get("https://api.thedogapi.com/v1/images/search?size=full", (resp) => {
@@ -12,11 +12,17 @@ module.exports = {
                 });
 
                 resp.on("end", () => {
-                    cats = JSON.parse(data);
+                    try {
+                        dogs = JSON.parse(data);
+                    } catch (err) {
+                        console.log("Error: " + err.message);
+                        require("../utils/editReply.js")(client, interaction, { content: "Unable to load doggo", ephemeral: true });
+                    }
+
                     let url = "";
 
-                    if (cats && cats.length) {
-                        url = cats[0].url;
+                    if (dogs && dogs.length) {
+                        url = dogs[0].url;
                     }
                     const textToDisplay = interaction.member.displayName + ", here is your cute doggo!";
 
