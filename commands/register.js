@@ -1,15 +1,15 @@
 const getArgValue = require("../utils/getArgValue.js");
 const XIVAPI = require("@xivapi/js");
-const xiv = new XIVAPI({
-    private_key: "9e6efa9de6ff4bb79fcc3e9638c900fbe52cd6ee170347a48cba2a6c6ea8dff5",
-    language: "en",
-    snake_case: false,
-});
 const saveConfigFile = require("../utils/saveConfigFile.js");
 const https = require("https");
 
 module.exports = {
     async execute(client, interaction, config) {
+        const xiv = new XIVAPI({
+            private_key: config.xivApiKey,
+            language: "en",
+            snake_case: false,
+        });
         const chars = require("../utils/loadConfigFile.js")("characters") || [];
         const args = interaction.options;
 
