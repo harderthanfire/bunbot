@@ -17,6 +17,7 @@ module.exports = {
                     } catch (err) {
                         console.log("Error: " + err.message);
                         require("../utils/editReply.js")(client, interaction, { content: "Unable to load kitty", ephemeral: true });
+                        return;
                     }
                     let url = "";
 
