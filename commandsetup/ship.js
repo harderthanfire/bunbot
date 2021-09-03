@@ -4,13 +4,13 @@ module.exports = function (client, config) {
         description: "Pass in two users to get their compatability scores",
         options: [
             {
-                name: "firstUser",
+                name: "firstuser",
                 type: "USER",
                 description: "The first user",
                 required: true,
             },
             {
-                name: "secondUser",
+                name: "seconduser",
                 type: "USER",
                 description: "The second user",
                 required: true,

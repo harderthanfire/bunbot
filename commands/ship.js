@@ -1,8 +1,8 @@
 const getArgValue = require("../utils/getArgValue.js");
 module.exports = async function (client, interaction) {
     const args = interaction.options;
-    const firstUser = await interaction.guild.members.fetch(getArgValue(args, "firstUser"));
-    const secondUser = await interaction.guild.members.fetch(getArgValue(args, "secondUser"));
+    const firstUser = await interaction.guild.members.fetch(getArgValue(args, "firstuser"));
+    const secondUser = await interaction.guild.members.fetch(getArgValue(args, "seconduser"));
     const seed = firstUser.id + secondUser.id;
     const percent = ~~(require("../utils/getRandom.js")(seed) * 100);
     const combinedUser = firstUser.nickname.substring(0, firstUser.length / 2) + secondUser.nickname.substring(secondUser.length / 2);
