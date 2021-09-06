@@ -9,7 +9,7 @@ module.exports = {
         }
 
         queue.leave();
-
+        client.music.deleteQueue(interaction.guildId);
         require("../utils/sendTextReply.js")(client, interaction, "Music stopped!");
     },
     data: {

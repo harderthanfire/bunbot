@@ -18,7 +18,7 @@ module.exports = {
             }
         });
 
-        require("../utils/sendTextReply.js")(client, interaction, shownQueue.join('\n'));
+        require("../utils/sendTextReply.js")(client, interaction, "\n" + shownQueue.join("\n"));
     },
     data: {
         name: "queue",
