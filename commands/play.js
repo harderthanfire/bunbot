@@ -3,14 +3,15 @@ const getArgValue = require("../utils/getArgValue.js");
 module.exports = {
     async execute(client, interaction) {
 
-        await require("../utils/sendReply.js")(client, interaction, { content: "Loading please wait...", ephemeral: true });
-
         const voiceChannel = interaction.member.voice.channel;
 
         if (!voiceChannel) {
             require("../utils/editReply.js")(client, interaction, { content: "Please join a voice channel!", ephemeral: true });
             return;
         }
+
+        await require("../utils/sendReply.js")(client, interaction, { content: "Loading please wait..." });
+
         const args = interaction.options;
         const url = getArgValue(args, "url");
 
