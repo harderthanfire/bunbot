@@ -26,7 +26,7 @@ module.exports = {
             {addedBy: interaction.member.displayName}
         );
 
-        require("../utils/editReply.js")(client, interaction, { content: "Track Queued!", ephemeral: true });
+        interaction.deleteReply();
     },
     data: {
         name: "play",
