@@ -10,8 +10,6 @@ module.exports = {
             return;
         }
 
-        await require("../utils/sendReply.js")(client, interaction, { content: "Loading please wait..." });
-
         const args = interaction.options;
         const url = getArgValue(args, "url");
 
@@ -26,8 +24,6 @@ module.exports = {
             url,
             {addedBy: interaction.member.displayName}
         );
-
-        interaction.deleteReply();
     },
     data: {
         name: "play",
