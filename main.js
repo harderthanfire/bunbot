@@ -6,19 +6,23 @@ const client = new Discord.Client({
 });
 
 const config = require("./utils/loadConfigFile.js")("config");
-
-client.music = new Player(
-    config.spotifyId, 
-    config.spotifySecret,
-    {canUseCache: true}
-);
+let lastPlayed = "";
+client.music = new Player(config.spotifyId, config.spotifySecret, { canUseCache: true });
 client.music.connect();
 
 client.music.on(EVT_TRACK_START, (channel, track) => {
-    channel.send(`Track ${track.title} started playing!`);
+    if (lastPlayed != track.title) {
+        channel.send(`Track ${track.title} started playing!`);
+        lastPlayed = track.title;
+    }
 });
+
 client.music.on(EVT_TRACK_ADD, (channel, tracks) => {
-    channel.send(`Added ${tracks.length} to the queue!`);
+    let titles = "";
+    for(const track of tracks) {
+        titles = titles + "\n" + track.title;
+    }
+    channel.send(`Added: ${titles} \n[${tracks.length} track(s)] to the queue!`);
 });
 
 client.on("ready", () => {
