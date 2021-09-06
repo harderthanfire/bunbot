@@ -6,7 +6,7 @@ module.exports = {
         const voiceChannel = interaction.member.voice.channel;
 
         if (!voiceChannel) {
-            require("../utils/editReply.js")(client, interaction, { content: "Please join a voice channel!", ephemeral: true });
+            require("../utils/sendReply.js")(client, interaction, { content: "Please join a voice channel!", ephemeral: true });
             return;
         }
 
@@ -18,12 +18,12 @@ module.exports = {
         if (!queue) {
             queue = client.music.createQueue(interaction.guildId, interaction.channel, voiceChannel, [], { emit: { trackStart: true } });
         }
-
         client.music.play(
             queue.id, 
             url,
             {addedBy: interaction.member.displayName}
         );
+        require("../utils/sendReply.js")(client, interaction, { content: "\nTrack(s) added."});
     },
     data: {
         name: "play",
