@@ -12,7 +12,7 @@ module.exports = {
                 const channel = client.channels.cache.get(config.dutyEventsChannel);
                 const message = await channel.messages.fetch(messageId);
 
-                let messageText = "@everyone " + getArgValue(args, "title") + " <a:yay:862723815472627732>";
+                let messageText = getArgValue(args, "title") + " <a:yay:862723815472627732>";
                 messageText += "\n\r:question: What: " + getArgValue(args, "description");
                 messageText += "\n\r:clock1: When: " + getArgValue(args, "date") + " " + getArgValue(args, "time") + " Server Time";
                 messageText += "\n\r Please react with " + getArgValue(args, "emoji") + " if you want to join!";
