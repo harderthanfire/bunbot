@@ -20,7 +20,8 @@ module.exports = {
 
         let messageText = "Please select from one of the following options: ";
         for (let i = 0; i < numOptions; i++) {
-            messageText += "\n\rOption " + (i+1) + ":  " + emojis[i];
+            const numberOut = i + 1;
+            messageText += "\n\rOption " + numberOut + ":  " + emojis[i];
         }
 
         try {
