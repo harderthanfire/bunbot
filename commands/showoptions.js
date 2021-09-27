@@ -43,7 +43,6 @@ module.exports = {
                 type: "INTEGER",
                 description: "The number of options to add - should be between 2 and 5",
                 required: true,
-                choices: [2,3,4,5],
             },
         ],
     },
