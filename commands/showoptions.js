@@ -11,22 +11,26 @@ module.exports = {
         }
 
         const numOptions = getArgValue(args, "num");
-        const emojis = [":one:", ":two:", ":three:", ":four:", ":five:"];
+
+        if (numOptions < 2 || numOptions > 5) {
+            require("../utils/sendReply.js")(client, interaction, { content: "Between 2 and 5 options only please!", ephemeral: true });
+            return;
+        }
+        const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣"];
 
         let messageText = "Please select from one of the following options: ";
         for (let i = 0; i < numOptions; i++) {
-            messageText += "\n\rOption " + i + ": " + emojis[i];
+            messageText += "\n\rOption " + i+1 + ":  " + emojis[i];
         }
 
         try {
             const channel = client.channels.cache.get(interaction.channelId);
             const message = await channel.send(messageText);
 
-            if (message) {        
+            if (message) {
                 for (let k = 0; k < numOptions; k++) {
                     message.react(emojis[k]);
                 }
-
             }
         } catch (e) {
             console.log(e);
