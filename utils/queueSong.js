@@ -1,6 +1,15 @@
 const ytcog = require("ytcog");
 module.exports = async function (client, interaction, playQuery) {
-    let text = "Add to queue failed";
+
+    await interaction
+        .reply({
+            content: "loading...",
+        })
+        .catch((e) => {
+            console.log(e);
+        });
+
+    let text = "Add to queue failed - video is probs age restricted";
 
     const url = isYoutube(playQuery) ? getYoutubeId(playQuery) : playQuery;
     const session = new ytcog.Session([
@@ -27,25 +36,28 @@ module.exports = async function (client, interaction, playQuery) {
         const video = search.videos[0];
         const videoOption = {
             id: video.info().options.id,
-            container: "wemb",
+            container: "webm",
             videoQuality: "none",
             audioQuality: "highest",
             mediaBitrate: "highest",
             metadata: "author,title",
         };
         await video.fetch([videoOption]);
-        song.video = video;
-        song.title = video.info().title;
-        song.duration = secondsToTime(video.info().duration);
+        const videoInfo = video.info();
+        if (videoInfo && videoInfo.audioStreams && videoInfo.audioStreams.length) {
+            song.video = video;
+            song.title = videoInfo.title;
+            song.duration = secondsToTime(videoInfo.duration);
+        }
     }
 
     if (song.video) {
-        text = "queued " + song.title + " (" + song.duration + ")";
+        text = song.title + " (" + song.duration + ") has been added to the queue";
         client.queue.push(song);
     }
 
     await interaction
-        .reply({
+        .editReply({
             content: interaction.member.displayName + ": " + text,
         })
         .catch((e) => {

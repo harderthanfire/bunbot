@@ -4,7 +4,6 @@ const client = new Discord.Client({
 });
 
 const config = require("./utils/loadConfigFile.js")("config");
-let lastPlayed = "";
 client.queue = [];
 client.volume = 1;
 client.playbackChannel = null;

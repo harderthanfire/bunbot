@@ -7,12 +7,9 @@ module.exports = {
         if (client.musicPlayer.connection) {
             client.musicPlayer.connection.destroy();
         }
-        client.musicPlayer.connection = null;
-        client.musicPlayer.textChannel = null;
-        client.playbackChannel = null;
-        client.musicPlayer.player = null;
-        client.musicPlayer.isPlaying = false;
         client.queue = [];
+        client.playbackChannel = null;
+        client.musicPlayer = {};
         require("../utils/sendTextReply.js")(client, interaction, "Music stopped!");
     },
     data: {
