@@ -2,18 +2,16 @@ const getArgValue = require("../utils/getArgValue.js");
 
 module.exports = {
     async execute(client, interaction) {
+        const args = interaction.options;
+        let volume = getArgValue(args, "vol");
 
-        let queue = client.music.getQueue(interaction.guildId);
-
-        if (!queue) {
-            require("../utils/sendReply.js")(client, interaction, { content: "Nothing is playing!", ephemeral: true });
-            return;
+        if (+volume > 200) {
+            volume = 200;
+        } else if (+volume < 0) {
+            volume = 0;
         }
 
-        const args = interaction.options;
-        const volume = getArgValue(args, "vol");
-
-        queue.setVolume(volume);
+        client.volume = +volume / 100;
 
         require("../utils/sendTextReply.js")(client, interaction, "Volume has been set to " + volume);
     },

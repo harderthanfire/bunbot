@@ -1,27 +1,22 @@
 module.exports = {
     async execute(client, interaction) {
-
-        let queue = client.music.getQueue(interaction.guildId);
-
-        if (!queue) {
+        if (!client.queue.length) {
             require("../utils/sendReply.js")(client, interaction, { content: "Nothing is playing!", ephemeral: true });
             return;
         }
 
-        const shownQueue = queue.showQueue({
-            limit: 100,
-            show: {
-                queueNumber: true,
-                addedBy: true,
-                align: true,
-                alignmentSpace: 70
-            }
-        });
+        const outputLine = [];
+        let count = 1;
+        for (const song of client.queue) {
+            const line = count + ". " + song.title + " (" + song.duration + ") - " + song.requester;
+            outputLine.push(line);
+            count++;
+        }
 
-        require("../utils/sendTextReply.js")(client, interaction, "\n" + shownQueue.join("\n"));
+        require("../utils/sendTextReply.js")(client, interaction, "\n" + outputLine.join("\n"));
     },
     data: {
         name: "queue",
-        description: "List what is currently playing"
+        description: "List what is currently playing",
     },
 };

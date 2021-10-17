@@ -1,19 +1,22 @@
 module.exports = {
     async execute(client, interaction) {
-
-        let queue = client.music.getQueue(interaction.guildId);
-
-        if (!queue) {
+        if (!client.queue.length || !client.musicPlayer.connection || !client.musicPlayer.player) {
             require("../utils/sendReply.js")(client, interaction, { content: "Nothing is playing!", ephemeral: true });
             return;
         }
-
-        queue.leave();
-        client.music.deleteQueue(interaction.guildId);
+        if (client.musicPlayer.connection) {
+            client.musicPlayer.connection.destroy();
+        }
+        client.musicPlayer.connection = null;
+        client.musicPlayer.textChannel = null;
+        client.playbackChannel = null;
+        client.musicPlayer.player = null;
+        client.musicPlayer.isPlaying = false;
+        client.queue = [];
         require("../utils/sendTextReply.js")(client, interaction, "Music stopped!");
     },
     data: {
         name: "stop",
-        description: "Stop the bot playing"
+        description: "Stop the bot playing",
     },
 };
