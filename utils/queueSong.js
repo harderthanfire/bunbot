@@ -34,7 +34,6 @@ module.exports = async function (client, interaction, playQuery) {
             metadata: "author,title",
         };
         await video.fetch([videoOption]);
-        //  const audioUrl = video.info().audioStreams[0].url;
         song.video = video;
         song.title = video.info().title;
         song.duration = secondsToTime(video.info().duration);
