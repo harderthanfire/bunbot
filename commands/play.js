@@ -60,13 +60,16 @@ module.exports = {
                                     }
                                 }
                                 const streamType = isWebM ? StreamType.WebmOpus : StreamType.Arbitrary;
-                                https.get(audioUrl, async (stream) => {
-                                    const resource = await createAudioResource(stream, { inputType: streamType });
-                                    client.musicPlayer.player.play(resource);
-                                    client.musicPlayer.isPlaying = true;
-                                    const channel = client.channels.cache.get(client.musicPlayer.textChannel);
-                                    const eventMessage = await channel.send("Now playing: " + client.queue[0].title + " (" + client.queue[0].duration + ")");
-                                });
+                                https
+                                    .get(audioUrl, async (stream) => {
+                                        const resource = await createAudioResource(stream, { inputType: streamType });
+                                        client.musicPlayer.player.play(resource);
+                                        client.musicPlayer.isPlaying = true;
+                                        const channel = client.channels.cache.get(client.musicPlayer.textChannel);
+                                        const eventMessage = await channel.send("Now playing: " + client.queue[0].title + " (" + client.queue[0].duration + ")");
+                                    })
+                                    .on("error", (e) => {
+                                    });
                             } else {
                                 setTimeout(() => {
                                     if (!client.queue.length) {
@@ -107,13 +110,16 @@ module.exports = {
                     }
                 }
                 const streamType = isWebM ? StreamType.WebmOpus : StreamType.Arbitrary;
-                https.get(audioUrl, async (stream) => {
-                    const resource = await createAudioResource(stream, { inputType: streamType });
-                    client.musicPlayer.player.play(resource);
-                    client.musicPlayer.isPlaying = true;
-                    const channel = client.channels.cache.get(client.musicPlayer.textChannel);
-                    const eventMessage = await channel.send("Now playing: " + client.queue[0].title + " (" + client.queue[0].duration + ")");
-                });
+                https
+                    .get(audioUrl, async (stream) => {
+                        const resource = await createAudioResource(stream, { inputType: streamType });
+                        client.musicPlayer.player.play(resource);
+                        client.musicPlayer.isPlaying = true;
+                        const channel = client.channels.cache.get(client.musicPlayer.textChannel);
+                        const eventMessage = await channel.send("Now playing: " + client.queue[0].title + " (" + client.queue[0].duration + ")");
+                    })
+                    .on("error", (e) => {
+                    });
             }
         }
     },
