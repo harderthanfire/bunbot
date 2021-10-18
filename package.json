@@ -4,11 +4,12 @@
   "description": "bunbot",
   "main": "main.js",
   "dependencies": {
+    "@discordjs/voice": "0.6.0",
     "@xivapi/js": "^0.3.3",
     "discord.js": "13.1.0",
-    "@discordjs/voice": "0.6.0",
-    "ytcog": "2.1.0",
-    "ffmpeg-static": "4.4.0"
+    "ffmpeg-static": "4.4.0",
+    "play-dl": "^1.1.7",
+    "ytcog": "2.1.0"
   },
   "devDependencies": {},
   "scripts": {

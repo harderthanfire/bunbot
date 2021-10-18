@@ -1,5 +1,6 @@
 const getArgValue = require("../utils/getArgValue.js");
 const ytcog = require("ytcog");
+const play = require("play-dl");
 const https = require("https");
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioResource, StreamType } = require("@discordjs/voice");
 
@@ -41,35 +42,12 @@ module.exports = {
                             }
                             if (client.queue.length) {
                                 const video = client.queue[0].video;
-                                const videoOption = {
-                                    id: video.info().options.id,
-                                    container: "wemb",
-                                    videoQuality: "none",
-                                    audioQuality: "highest",
-                                    mediaBitrate: "highest",
-                                    metadata: "author,title",
-                                };
-                                await video.fetch([videoOption]);
-                                let audioUrl = video.info().audioStreams[0].url;
-                                let isWebM = false;
-                                for (const audio of video.info().audioStreams) {
-                                    if (audio.container == "webm") {
-                                        audioUrl = audio.url;
-                                        isWebM = true;
-                                        break;
-                                    }
-                                }
-                                const streamType = isWebM ? StreamType.WebmOpus : StreamType.Arbitrary;
-                                https
-                                    .get(audioUrl, async (stream) => {
-                                        const resource = await createAudioResource(stream, { inputType: streamType });
-                                        client.musicPlayer.player.play(resource);
-                                        client.musicPlayer.isPlaying = true;
-                                        const channel = client.channels.cache.get(client.musicPlayer.textChannel);
-                                        const eventMessage = await channel.send("Now playing: " + client.queue[0].title + " (" + client.queue[0].duration + ")");
-                                    })
-                                    .on("error", (e) => {
-                                    });
+                                let stream = await play.stream("https://youtu.be/" + video.info().options.id);
+                                const resource = await createAudioResource(stream.stream, { inputType: stream.type });
+                                client.musicPlayer.player.play(resource);
+                                client.musicPlayer.isPlaying = true;
+                                const channel = client.channels.cache.get(client.musicPlayer.textChannel);
+                                const eventMessage = await channel.send("Now playing: " + client.queue[0].title + " (" + client.queue[0].duration + ")");
                             } else {
                                 setTimeout(() => {
                                     if (!client.queue.length) {
@@ -100,26 +78,12 @@ module.exports = {
                     metadata: "author,title",
                 };
                 await video.fetch([videoOption]);
-                let audioUrl = video.info().audioStreams[0].url;
-                let isWebM = false;
-                for (const audio of video.info().audioStreams) {
-                    if (audio.container == "webm") {
-                        audioUrl = audio.url;
-                        isWebM = true;
-                        break;
-                    }
-                }
-                const streamType = isWebM ? StreamType.WebmOpus : StreamType.Arbitrary;
-                https
-                    .get(audioUrl, async (stream) => {
-                        const resource = await createAudioResource(stream, { inputType: streamType });
-                        client.musicPlayer.player.play(resource);
-                        client.musicPlayer.isPlaying = true;
-                        const channel = client.channels.cache.get(client.musicPlayer.textChannel);
-                        const eventMessage = await channel.send("Now playing: " + client.queue[0].title + " (" + client.queue[0].duration + ")");
-                    })
-                    .on("error", (e) => {
-                    });
+                let stream = await play.stream("https://youtu.be/" + video.info().options.id);
+                const resource = await createAudioResource(stream.stream, { inputType: stream.type });
+                client.musicPlayer.player.play(resource);
+                client.musicPlayer.isPlaying = true;
+                const channel = client.channels.cache.get(client.musicPlayer.textChannel);
+                const eventMessage = await channel.send("Now playing: " + client.queue[0].title + " (" + client.queue[0].duration + ")");
             }
         }
     },
