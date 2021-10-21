@@ -8,7 +8,7 @@
     "@xivapi/js": "^0.3.3",
     "discord.js": "13.1.0",
     "ffmpeg-static": "4.4.0",
-    "miniget": "4.2.1",
+    "play-dl": "1.2.0",
     "ytcog": "2.1.2"
   },
   "devDependencies": {},

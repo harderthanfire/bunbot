@@ -28,31 +28,34 @@ module.exports = async function (client, interaction, playQuery) {
         period: "any",
         quantity: 1,
     };
+
+    let videoId = url;
+
     if (!isTheTube) {
         const search = new ytcog.Search(session, searchOptions);
-        let videoId = url;
+
         await search.fetch(searchOptions);
         if (search.videos && search.videos.length) {
             const video = search.videos[0];
             videoId = video.info().options.id;
         }
-        const videoOption = {
-            id: videoId,
-            container: "webm",
-            videoQuality: "none",
-            audioQuality: "highest",
-            mediaBitrate: "highest",
-            metadata: "author,title",
-        };
+    }
+    const videoOption = {
+        id: videoId,
+        container: "webm",
+        videoQuality: "none",
+        audioQuality: "highest",
+        mediaBitrate: "highest",
+        metadata: "author,title",
+    };
 
-        const newVideo = new ytcog.Video(session, videoOption);
-        await newVideo.fetch([videoOption]);
-        const videoInfo = newVideo.info();
-        if (videoInfo && videoInfo.audioStreams && videoInfo.audioStreams.length) {
-            song.video = newVideo;
-            song.title = videoInfo.title;
-            song.duration = secondsToTime(videoInfo.duration);
-        }
+    const newVideo = new ytcog.Video(session, videoOption);
+    await newVideo.fetch([videoOption]);
+    const videoInfo = newVideo.info();
+    if (videoInfo && videoInfo.audioStreams && videoInfo.audioStreams.length) {
+        song.video = newVideo;
+        song.title = videoInfo.title;
+        song.duration = secondsToTime(videoInfo.duration);
     }
 
     if (song.video) {

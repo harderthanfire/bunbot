@@ -1,6 +1,6 @@
 const getArgValue = require("../utils/getArgValue.js");
-const miniget = require('miniget');
 const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require("@discordjs/voice");
+const play = require("play-dl");
 
 module.exports = {
     async execute(client, interaction) {
@@ -40,9 +40,9 @@ module.exports = {
                             }
                             if (client.queue.length) {
                                 const video = client.queue[0].video;
-                                let inputStream = miniget(video.audioStreams[0].url);
-                                const resource = await createAudioResource(inputStream, { inlineVolume: true });
-                                resource.volume.setVolume(client.volume);
+                                let stream = await play.stream("https://youtu.be/" + video.info().options.id);
+                                const resource = await createAudioResource(stream.stream, { inputType: stream.type, inlineVolume: true });
+                                resource.volume.setVolumeDecibels(client.volume * 50);
                                 client.musicPlayer.player.play(resource);
                                 client.musicPlayer.isPlaying = true;
                                 const channel = client.channels.cache.get(client.musicPlayer.textChannel);
@@ -77,9 +77,9 @@ module.exports = {
                     metadata: "author,title",
                 };
                 await video.fetch([videoOption]);
-                let inputStream = miniget(video.audioStreams[0].url);
-                const resource = await createAudioResource(inputStream, { inlineVolume: true });
-                resource.volume.setVolume(client.volume);
+                let stream = await play.stream("https://youtu.be/" + video.info().options.id);
+                const resource = await createAudioResource(stream.stream, { inputType: stream.type, inlineVolume: true });
+                resource.volume.setVolumeDecibels(client.volume * 50);
                 client.musicPlayer.player.play(resource);
                 client.musicPlayer.isPlaying = true;
                 const channel = client.channels.cache.get(client.musicPlayer.textChannel);
